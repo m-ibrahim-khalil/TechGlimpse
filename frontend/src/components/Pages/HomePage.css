@@ -1,0 +1,50 @@
+.HomePage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: inset 0px 4px 4px 500px rgba(7, 60, 58, 0.81);
+}
+
+.HomePage h3 {
+  font-family: 'Secular One';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 45px;
+  width: 500px;
+  line-height: 50px;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.HomePage h6 {
+  font-family: 'Secular One';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  width: 600px;
+  line-height: 50px;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.learnMore {
+  display: inline-block;
+  padding: 1em 2em;
+  background-color: #154cb3da;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.3em;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  font-size: 1rem;
+}

@@ -1,0 +1,4 @@
+/api/* https://fine-lime-bull-gear.cyclic.app/api/:splat 200
+/api/_ https://fine-lime-bull-gear.cyclic.app/:splat 200
+/_ /index.html 200
+/\* /index.html 404

@@ -1,0 +1,68 @@
+# Stage 1: Build the React app
+FROM node:lts-alpine
+WORKDIR /app
+# Copy package.json and package-lock.json to the container
+COPY package.json .
+COPY yarn.lock .
+# Install project dependencies
+RUN yarn install --frozen-lockfile --non-interactive --production=false --network-timeout 100000
+# Copy the rest of the project files
+COPY . .
+
+EXPOSE 3000
+
+CMD [ "yarn", "dev" ]
+
+# # Stage 2: Serve the built app using Nginx
+# FROM nginx:alpine
+# WORKDIR /usr/share/nginx/html
+
+# RUN rm -rf ./*
+# # Copy the built app from the previous stage to Nginx's HTML directory
+# COPY --from=builder /app/dist .
+
+# # Expose port 80
+# EXPOSE 80
+
+# # Start Nginx when the container launches
+# CMD ["nginx", "-g", "daemon off;"]
+
+
+
+
+
+# FROM node:lts-alpine as build
+
+# ENV BUILDKIT_COLORS="run=123,20,245:error=yellow:cancel=blue:warning=white"
+# ENV CI=true
+# ENV PORT=5173
+
+# WORKDIR /app
+# COPY package.json /app/package.json
+# COPY yarn.lock /app/yarn.lock
+# RUN yarn install --frozen-lockfile --non-interactive --production=false
+# COPY . /app
+
+# CMD [ "yarn", "dev" ]
+
+# FROM build as builder
+# RUN yarn build
+
+# FROM build as dev-envs
+# RUN <<EOF
+# apt-get update
+# apt-get install -y --no-install-recommends git
+# EOF
+
+# RUN <<EOF
+# useradd -s /bin/bash -m vscode
+# groupadd docker
+# usermod -aG docker vscode
+# EOF
+
+
+# COPY --from=gloursdocker/docker / /
+# CMD [ "yarn", "dev" ]
+
+# FROM nginx:1.13-alpine
+# COPY --from=builder /app/build /usr/share/nginx/html
