@@ -10,4 +10,10 @@ git clone https://github.com/m-ibrahim-khalil/TechGlimpse
 docker compose up
 ```
 
-## Api List
+## Frontend
+
+[➡️ &nbsp;Frontend ➡️](../frontend/README.md)
+
+## Backend
+
+[➡️ &nbsp;Backend ➡️](../backend/README.md)
