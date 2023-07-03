@@ -12,8 +12,8 @@ docker compose up
 
 ## Frontend
 
-[➡️ &nbsp;Frontend ➡️](../../frontend/README.md)
+[➡️ &nbsp;Frontend ➡️](frontend/README.md)
 
 ## Backend
 
-[➡️ &nbsp;Backend ➡️](../../backend/README.md)
+[➡️ &nbsp;Backend ➡️](backend/README.md)
