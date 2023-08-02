@@ -21,6 +21,9 @@ Story.init({
         type: DataTypes.TEXT,
         allowNull: false,
     }
+    coverImage: {
+        type: DataTypes.STRING,
+      },
 }, {sequelize});
 
 module.exports = Story;
