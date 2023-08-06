@@ -14,9 +14,9 @@ class Server {
   }
 
   setup(config) {
-    this.server.set('env', config.env);
-    this.server.set('hostname', config.host);
-    this.server.set('port', config.port);
+    this.server.set('env', config.NODE_ENV);
+    this.server.set('hostname', config.HOST);
+    this.server.set('port', config.PORT);
     this.server.use(
       cors({
         origin: ['http://localhost:5173', 'http://192.168.1.73:5173', 'http://0.0.0.0:5173', 'http://127.0.0.1:5173'],

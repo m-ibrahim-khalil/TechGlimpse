@@ -1,14 +1,14 @@
 const { Sequelize } = require('sequelize');
-const { dbConfig } = require('./configs/configuration');
+const { db } = require('./configs/db.config');
 const logger = require('./logger');
 
 const sequelize = new Sequelize(
-  dbConfig.database,
-  dbConfig.user,
-  dbConfig.password,
+  db.database,
+  db.user,
+  db.password,
   {
-    dialect: dbConfig.dialect,
-    host: dbConfig.host,
+    dialect: db.dialect,
+    host: db.host,
     define: {
       freezeTableName: true,
     },
@@ -17,7 +17,7 @@ const sequelize = new Sequelize(
 );
 
 const testF = async () => {
-  console.log('testF: ', dbConfig.database, dbConfig.user, dbConfig.password, dbConfig.dialect, dbConfig.host, dbConfig.port);
+  console.log('testF: ', db.database, db.user, db.password, db.dialect, db.host, db.port);
   try {
     await sequelize.authenticate();
     logger.info('Connection has been established successfully.');

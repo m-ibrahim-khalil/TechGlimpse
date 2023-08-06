@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+const dotenv = require('dotenv');
 
 let envFileName = ".env";
 
@@ -21,7 +21,7 @@ dotenv.config({
   path: envFileName,
 });
 
-export const environment = {
+const environment = {
   APP_NAME: process.env.APP_NAME ?? "TechGlimpse",
   NODE_ENV: process.env.NODE_ENV ?? "production",
   PORT: process.env.PORT ?? 3000,
@@ -45,3 +45,5 @@ export const environment = {
   CLOUDINARY_SECRET: process.env.CLOUDINARY_SECRET ?? "CLOUDINARY_SECRET",
   CLOUDINARY_FOLDER: process.env.CLOUDINARY_FOLDER ?? "CLOUDINARY_FOLDER",
 };
+
+module.exports = { environment };

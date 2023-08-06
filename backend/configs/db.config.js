@@ -1,8 +1,8 @@
-import { Sequelize } from "sequelize";
-import { logger } from "../logger.js";
-import { environment } from "./environment.config.js";
+const { Sequelize } = require("sequelize");
+const { logger } = require("../logger");
+const { environment } = require("./environment.config");
 
-export const dbConfig = new Sequelize({
+const db = new Sequelize({
   dialect: environment.DB_DIALECT,
   host: environment.DB_HOST,
   port: environment.DB_PORT,
@@ -12,13 +12,15 @@ export const dbConfig = new Sequelize({
   logging: environment.NODE_ENV === "development" ? (msg) => logger.info(msg): false,
 });
 
-export async function connectToDatabase(forceSync = false) {
+async function connectToDb(forceSync = false) {
   try {
-    await database.authenticate();
+    await db.authenticate();
     logger.info('Connection has been established successfully.');
-    await database.sync({ force: forceSync });
-    logger.info("Database synced...");
+    await db.sync({ force: forceSync });
+    logger.info("db synced...");
   } catch (error) {
-    logger.debug("Unable to connect to the database:", error);
+    logger.debug("Unable to connect to the db:", error);
   }
 }
+
+module.exports = { db, connectToDb };
