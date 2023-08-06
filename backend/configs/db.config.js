@@ -2,25 +2,28 @@ const { Sequelize } = require("sequelize");
 const { logger } = require("../logger");
 const { environment } = require("./environment.config");
 
-const db = new Sequelize({
-  dialect: environment.DB_DIALECT,
-  host: environment.DB_HOST,
-  port: environment.DB_PORT,
-  database: environment.DB_NAME,
-  user: environment.DB_USER,
-  password: environment.DB_PASSWORD,
-  logging: environment.NODE_ENV === "development" ? (msg) => logger.info(msg): false,
-});
-
-async function connectToDb(forceSync = false) {
-  try {
-    await db.authenticate();
-    logger.info('Connection has been established successfully.');
-    await db.sync({ force: forceSync });
-    logger.info("db synced...");
-  } catch (error) {
-    logger.debug("Unable to connect to the db:", error);
+const sequelize = new Sequelize(
+  environment.DB_NAME,
+  environment.DB_USER,
+  environment.DB_PASSWORD,
+  {
+    dialect: environment.DB_DIALECT,
+    host: environment.DB_HOST,
+    define: {
+      freezeTableName: true,
+    },
+    logging: (msg) => logger.info(msg),
   }
-}
+);
 
-module.exports = { db, connectToDb };
+const connectToDb = async () => {
+  try {
+    await sequelize.authenticate();
+    logger.info('Connection has been established successfully.');
+  } catch (error) {
+    logger.debug("Unable to connect to the sequelize:", error);
+  }
+};
+connectToDb();
+
+module.exports = { sequelize, connectToDb };

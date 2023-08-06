@@ -36,6 +36,7 @@ class Server {
     const port = this.server.get('port');
     this.server.listen(port, () => {
       logger.info(`Express server listening on - http://${hostname}:${port}`);
+      
     });
   }
 }

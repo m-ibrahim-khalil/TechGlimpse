@@ -1,30 +1,31 @@
-import { cloudinary } from "../configs/cloudinary.config.js";
-import { environment } from "../configs/environment.config.js";
-import { HttpError } from "../utils/httpError.js";
-import { StatusCode } from "../utils/statusCode.js";
+// import { cloudinary } from "../configs/cloudinary.config.js";
+// import { environment } from "../configs/environment.config.js";
+// import { HttpError } from "../utils/httpError.js";
+// import { StatusCode } from "../utils/statusCode.js";
+
+const { cloudinary } = require("../configs/cloudinary.config.js");
+const {ForbiddenError, InternalServerError} = require("../errors");
+const { environment } = require("../configs/environment.config.js");
 
 
 const fileFilter = (req, file, cb) => {
   if (!file.mimetype.startsWith("image/"))
     return cb(
-      new HttpError(
-        StatusCode.FORBIDDEN,
+      new ForbiddenError(
         "Only jpg, jpeg and png files are allowed."
-      ),
-      false
+      ), false
     );
 
   if (file.size > 5 * 1024 * 1024)     // 5 MB (5 * 1024 * 1024)
     return cb(
-      new HttpError(StatusCode.FORBIDDEN, "File size must be less than 5 MB."),
-      false
+      new ForbiddenError( "File size must be less than 5 MB."), false
     );
 
   return cb(null, true);
 };
 
 
-export const uploadImage = async (req, res, next) => {
+const uploadImage = async (req, res, next) => {
   if (!req.file) return next();
 
   cloudinary.uploader
@@ -38,8 +39,7 @@ export const uploadImage = async (req, res, next) => {
         if (error) {
           console.error(error);
           return next(
-            new HttpError(
-              StatusCode.INTERNAL_SERVER_ERROR,
+            new InternalServerError(
               "Error while uploading image."
             )
           );
@@ -51,3 +51,5 @@ export const uploadImage = async (req, res, next) => {
     )
     .end(req.file.buffer);
 };
+
+module.exports = { fileFilter, uploadImage };

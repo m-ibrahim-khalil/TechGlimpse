@@ -1,6 +1,6 @@
 'use strict'
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../connectDb');
+const {sequelize} = require('../configs/db.config');
 const User = require('./User')
 
 class Story extends Model {}
@@ -20,9 +20,9 @@ Story.init({
     description: {
         type: DataTypes.TEXT,
         allowNull: false,
-    }
+    },
     coverImage: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
       },
 }, {sequelize});
 

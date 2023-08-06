@@ -1,6 +1,6 @@
 'use strict'
 const { Model, DataTypes } = require('sequelize');
-const {db} = require('../configs/db.config');
+const {sequelize} = require('../configs/db.config');
 
 class User extends Model {}
 
@@ -47,6 +47,6 @@ User.init({
             }
         }
     }
-}, {db});
+}, {sequelize});
 
 module.exports = User;

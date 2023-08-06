@@ -24,7 +24,7 @@ dotenv.config({
 const environment = {
   APP_NAME: process.env.APP_NAME ?? "TechGlimpse",
   NODE_ENV: process.env.NODE_ENV ?? "production",
-  PORT: process.env.PORT ?? 3000,
+  PORT: process.env.PORT ?? 3001,
   HOST: process.env.HOST ?? "localhost",
 
   DB_NAME: process.env.DB_NAME ?? "postgres",
