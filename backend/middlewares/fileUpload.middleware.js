@@ -26,8 +26,8 @@ const fileFilter = (req, file, cb) => {
 
 
 const uploadImage = async (req, res, next) => {
-  if (!req.file) return next();
-
+  console.log(req)
+  if (!req?.coverImage) return next();
   cloudinary.uploader
     .upload_stream(
       {

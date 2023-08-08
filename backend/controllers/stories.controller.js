@@ -90,6 +90,7 @@ class StoriesControler {
     try {
       const { id } = req.params;
       const { title, description } = req.body;
+      console.log(req?.data, req?.file, req?.body)
       const coverImage = req.file?.secure_url ?? req.body.coverImage ?? null;
       if (!id)
         throw new BadRequestError({

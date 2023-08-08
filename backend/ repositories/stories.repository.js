@@ -48,7 +48,7 @@ class StorysRepository {
     return story;
   }
 
-  async updateById(id, title, description) {
+  async updateById(id, title, description, coverImage) {
     const data = await Story.update(
       { title, description, coverImage },
       {

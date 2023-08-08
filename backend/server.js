@@ -21,6 +21,7 @@ class Server {
       cors({
         origin: ['http://localhost:5173', 'http://192.168.1.73:5173', 'http://0.0.0.0:5173', 'http://127.0.0.1:5173'],
         credentials: true,
+        allowedHeaders: ["Content-Type", "Authorization"],
       })
     );
     this.server.use(express.json());
