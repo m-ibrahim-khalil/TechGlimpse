@@ -64,7 +64,7 @@ class StoriesControler {
   async createStory(req, res, next) {
     try {
       const { title, description } = await req.body;
-      const coverImage = req.file?.secure_url ?? null;
+      const coverImageURL = req.file?.secure_url ?? null;
       const { username } = req;
 
       if (!title || !description)
@@ -75,7 +75,7 @@ class StoriesControler {
       const { message } = await StoriesService.createStory(
         title,
         description,
-        coverImage,
+        coverImageURL,
         username
       );
       return new ContentNegotiation(res, 201, {
@@ -90,8 +90,7 @@ class StoriesControler {
     try {
       const { id } = req.params;
       const { title, description } = req.body;
-      console.log(req?.data, req?.file, req?.body)
-      const coverImage = req.file?.secure_url ?? req.body.coverImage ?? null;
+      const coverImageURL = req.file?.secure_url ?? req.body?.coverImageURL;
       if (!id)
         throw new BadRequestError({
           name: 'Validation Error!',
@@ -106,7 +105,7 @@ class StoriesControler {
         id,
         title,
         description,
-        coverImage
+        coverImageURL
       );
       return new ContentNegotiation(res, 200, {
         message,

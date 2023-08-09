@@ -8,17 +8,19 @@ const {
   AuthenticationMiddleware,
   StoryAuthorizationMiddleware,
   uploadImage,
+  upload
 } = require('../middlewares');
 
 StoriesRouter.route('/')
   .get(StoriesControler.getAllStories)
-  .post(AuthenticationMiddleware, uploadImage, StoriesControler.createStory);
+  .post(AuthenticationMiddleware, upload.single('coverImage'), uploadImage, StoriesControler.createStory);
 
 StoriesRouter.route('/:id')
   .get(StoriesControler.getStoryById)
   .put(
     AuthenticationMiddleware,
     StoryAuthorizationMiddleware,
+    upload.single('coverImage'),
     uploadImage,
     StoriesControler.updateById
   )

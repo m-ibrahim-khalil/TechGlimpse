@@ -31,19 +31,19 @@ class StoriesService {
     return { message: response };
   }
 
-  async createStory(title, description, coverImage, username) {
+  async createStory(title, description, coverImageURL, username) {
     const { message: user } = await UsersService.findUser(username);
     const createdStory = await StoriesRepository.create(
       title,
       description,
-      coverImage,
+      coverImageURL,
       user.id
     );
     return { message: new CreateOnlyStory(createdStory) };
   }
 
-  async updateById(id, title, description, coverImage) {
-    const story = await StoriesRepository.updateById(id, title, description, coverImage);
+  async updateById(id, title, description, coverImageURL) {
+    const story = await StoriesRepository.updateById(id, title, description, coverImageURL);
     if (!story[0])
       throw new HTTP404NotFoundError({
         name: 'Not Found',

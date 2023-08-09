@@ -21,7 +21,7 @@ Story.init({
         type: DataTypes.TEXT,
         allowNull: false,
     },
-    coverImage: {
+    coverImageURL: {
         type: DataTypes.TEXT,
       },
 }, {sequelize});

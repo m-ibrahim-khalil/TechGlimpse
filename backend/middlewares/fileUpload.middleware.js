@@ -6,6 +6,7 @@
 const { cloudinary } = require("../configs/cloudinary.config.js");
 const {ForbiddenError, InternalServerError} = require("../errors");
 const { environment } = require("../configs/environment.config.js");
+const multer  = require('multer')
 
 
 const fileFilter = (req, file, cb) => {
@@ -26,14 +27,16 @@ const fileFilter = (req, file, cb) => {
 
 
 const uploadImage = async (req, res, next) => {
-  console.log(req)
-  if (!req?.coverImage) return next();
+  if (!req?.file) return next();
   cloudinary.uploader
     .upload_stream(
       {
         folder: environment.CLOUDINARY_FOLDER,
         resource_type: "image",
-        transformation: [{ width: 1000, height: 1000, crop: "limit" }],
+        transformation: [
+          { width: 960, height: 560, crop: "fill" },
+          { effect: 'outline:10', color: 'black' },
+        ],
       },
       (error, result) => {
         if (error) {
@@ -52,4 +55,9 @@ const uploadImage = async (req, res, next) => {
     .end(req.file.buffer);
 };
 
-module.exports = { fileFilter, uploadImage };
+const upload = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: fileFilter,
+});
+
+module.exports = { fileFilter, uploadImage, upload };

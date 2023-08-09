@@ -2,7 +2,7 @@ class ViewOnlyStory {
   constructor(story) {
     this.title = story.title;
     this.description = story.description;
-    this.coverImage = story.coverImage;
+    this.coverImageURL = story.coverImageURL;
     this.updatedAt = story.updatedAt.toString();
     this.id = story.id;
     this.author = story.author ? story.author.username : 'Unknown Author!';
