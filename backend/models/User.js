@@ -46,7 +46,27 @@ User.init({
               msg: 'Please enter your password.'
             }
         }
-    }
+    },
+    firstName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    lastName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    bio: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+    },
+    gender: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    birthDate: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
 }, {sequelize});
 
 module.exports = User;
