@@ -89,12 +89,15 @@ class UsersService {
         description: 'User does not exists!',
       });
     }
-    const emailInUsed = await UsersRepository.findByEmail(userInfo.email);
-    if (emailInUsed && emailInUsed.username !== username) {
-      throw new BadRequestError({
-        name: 'Conflict',
-        description: 'email already exist!',
-      });
+    if(userInfo?.email) {
+      const emailInUsed = await UsersRepository.findByEmail(userInfo.email);
+      if (emailInUsed && emailInUsed.username !== username) {
+        throw new BadRequestError({
+          name: 'Conflict',
+          description: 'email already exist!',
+        });
+      }
+    }
     const user = await UsersRepository.updateUserInfoByUsername(
       username,
       userInfo
@@ -105,7 +108,6 @@ class UsersService {
         description: 'Update user info failed!',
       });
     return { message: 'User info updated!' }; 
-  }
 }
 
   async deleteByUsername(username) {
